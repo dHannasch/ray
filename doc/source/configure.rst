@@ -125,6 +125,13 @@ All Nodes
 - ``--node-manager-port``: Raylet port for node manager. Default: Random value.
 - ``--object-manager-port``: Raylet port for object manager. Default: Random value.
 
+Note that although ``--node-manager-port`` is accepted by ``ray start`` without
+``--head``, it is ignored on non-head nodes. ``--node-manager-port`` is set
+automatically based on the ``--node-manager-port`` given to the head node.
+Thus, attempting to set a different ``--node-manager-port`` for a non-head node
+will fail; no service will be running on that second port. All nodes must open
+the same ``--node-manager-port`` that is open on the head node.
+
 The following options specify the range of ports used by worker processes across machines. All ports in the range should be open.
 
 - ``--min-worker-port``: Minimum port number worker can be bound to. Default: 10000.
